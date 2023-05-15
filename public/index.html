@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      font-family: sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <form action="" method="POST">
+    <input type="number" name="num" required id="num" placeholder="Input Angka">
+    <br><br>
+    <button formaction="http://localhost:3000/segitiga">Generate segitiga</button>
+    <button formaction="http://localhost:3000/ganjil">Generate Bilangan Ganjil</button>
+    <button formaction="http://localhost:3000/prima">Generate Bilangan Prima</button>
+  </form>
+  <h1>Result: </h1>
+  <div id="result"></div>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script>
+    let num 
+    $('form').submit(function (e) {
+      e.preventDefault()
+    })
+    $('input').change(function() {
+      num = $(this).val()
+    })
+    $('button').click(function () {
+      let url = $(this).attr("formaction")
+      if (url) {        
+        $.ajax({
+          url,
+          method: "POST",
+          data: {num}
+        }).done(function (data) {
+          console.log(data);
+          $("#result").html(data)
+        })
+      }
+    })
+  </script>
+</body>
+</html>
